@@ -78,8 +78,10 @@ prediction_proba = load_clf.predict_proba(df)
 
 
 st.subheader('Prediction')
-# penguins_species = np.array(['Adelie','Chinstrap','Gentoo'])
-st.write(prediction)
+res = np.array(['No, You Died','Yes, You Survived'])
+# st.write(res[prediction])
+st.write(pd.DataFrame(prediction,columns=['Survived']))
 
 st.subheader('Prediction Probability')
-st.write(prediction_proba)
+# st.write(prediction_proba)
+st.write(pd.DataFrame(prediction_proba).rename(columns={0:'Died',1:'Survived'}))
