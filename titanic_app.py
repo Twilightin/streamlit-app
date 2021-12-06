@@ -5,7 +5,7 @@ import joblib
 import xgboost as xgb # XGBoost stuff
 
 st.write("""
-# Penguin Prediction App
+# Survived Prediction App
 This app predicts the **Palmer Penguin** species!
 Data obtained from the [palmerpenguins library](https://github.com/allisonhorst/palmerpenguins) in R by Allison Horst.
 """)
@@ -24,8 +24,8 @@ else:
     def user_input_features():
     
 
-        var_age = st.sidebar.slider('Age', 0.0,80.1)
-        var_fare = st.sidebar.slider('Fare', 0,512,2)
+        var_age = st.sidebar.slider('Age', 0,81,1)
+        var_fare = st.sidebar.slider('Fare', 0,512,5)
         var_sp = st.sidebar.slider('SP', 0,10,1)
 
 
@@ -52,7 +52,7 @@ titanic = titanic_raw.drop(columns=['Survived'])
 df = pd.concat([input_df,titanic],axis=0)
 
 # Encoding of ordinal features
-# https://www.kaggle.com/pratik1120/penguin-dataset-eda-classification-and-clustering
+# https://www.kaggle.com/c/titanic
 encode = ['Sex','Pclass','Embarked']
 for col in encode:
     dummy = pd.get_dummies(df[col], prefix=col)
