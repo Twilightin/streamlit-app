@@ -84,4 +84,4 @@ st.write(pd.DataFrame(prediction,columns=['Survived']))
 
 st.subheader('Prediction Probability')
 # st.write(prediction_proba)
-st.write(pd.DataFrame(prediction_proba).rename(columns={0:'Died',1:'Survived'}))
+st.write(pd.DataFrame(prediction_proba,columns=['Died','Survived']))
