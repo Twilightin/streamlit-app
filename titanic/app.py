@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+import joblib
 import xgboost as xgb # XGBoost stuff
 
 st.write("""
@@ -47,7 +47,6 @@ else:
 
 # Combines user input features with entire penguins dataset
 # This will be useful for the encoding phase
-
 titanic_raw = pd.read_csv('titanic_cleaned.csv',index_col=0)
 titanic = titanic_raw.drop(columns=['Survived'])
 df = pd.concat([input_df,titanic],axis=0)
@@ -71,17 +70,11 @@ else:
     st.write(df)
 
 # Reads in saved classification model
-load_clf = xgb.Booster()
-load_clf.load_model("model.json")
-
-load_clf2 = xgb.XGBRegressor()
-load_clf2.load_model("model.json")
+load_clf = joblib.load('xgb_job')
 
 # Apply model to make predictions
-dtest = xgb.DMatrix(df)
-prediction = load_clf.predict(dtest)
-
-prediction_proba = load_clf2.predict(df)
+prediction = load_clf.predict(df)
+prediction_proba = load_clf.predict_proba(df)
 
 
 st.subheader('Prediction')
